@@ -84,137 +84,27 @@ commit: 对应快照，对应一个新的版本；
 
 版本号：1094adb7b9b3807259d8cb349e7df1d4d6477073
 
- 
+##  名词
 
 ### 分支
 
-创建分支 git branch dev(分支名字)
 
-切换分支 git checkout name(master or dev) 
 
-​        另外一种方式： git switch name 
+### git stash
 
-删除分支 git branch –d name 
+作用就是将目前还不想提交的蛤是已经修改的内容进行保存至堆栈中，后续可以在某个分支上恢复出堆栈的内容。
 
-合并分支 git merge name 
+stash中的内容不仅可以恢复到原先开发的分支，还可以恢复到其他任意的分支。
 
-​        把分支dev合并到主分支上需要先切换到主分支上再合并，如下
 
-​        git checkout master ;  git checkout –d dev 
 
- 
+git stash的作用范围包括工作区和暂存区中的内容，也就是没有提交的内容都会保存 堆栈。
 
-创建并切换到新的分机
 
-1， git checkout –b name 
 
-2， git switch –c name 
+git add 只是把文件添加到git版本控制里，并不等于就被stash起来了，git add和git  stash并没有必然的关系，但是执行git stash的前提必须在git版本控制中才行。
 
- 
 
-一、     如果两个分支是完全相同时，即最后一次commit完全相同，才可以在不add commit新修改的情况下切换分支；
-
-二、     切换分支后工作区的文件内容就会变为这个分支最后一次commit的内容。
-
- 
-
-**Fast****模式**
-
-​    通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
-
- 
-
-**禁用Fast****模式**
-
-如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。禁用Fast forward模式 ，使用--no-ff参数，表示禁用Fast forward：
-
-$ git merge --no-ff -m "merge with no-ff" dev
-
- 
-
-#### Bug分支
-
-#### git stash
-
-stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作
-
-工作区是干净的，刚才的工作现场存到哪去了？用
-
-git stash list
-
-命令看看：
-
-$ git stash list
-
-stash@{0}: WIP on dev: f52c633 add merge
-
- 
-
-一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
-
- 
-
-另一种方式是用git stash pop，恢复的同时把stash内容也删了：
-
- 
-
- 
-
-你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
-
- 
-
-$ git stash apply stash@{0}
-
- 
-
-#### cherry-pick命令
-
-复制一个特定的提交到当前分支：
-
-$ git cherry-pick 4c805e2
-
-​    cherry-pick *选出最佳项目；做出最佳选择*
-
-#### feature分支
-
-开发一个新feature，最好新建一个分支；
-
-如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
-
-#### rebase 变基操作、、、
-
- 
-
- 
-
- 
-
-### 远程仓库
-
-1、新建一个远程仓库为空
-
-2、本地与远程仓库关联
-
-3、从本地第一次推送 
-
-​    -u 参数 
-
-​    1， 把本地的内容推送到远程
-
-2，把本地的master与远程的master关联
-
- 
-
-1、 --- 
-
-2、 git remote add [仓库的名字:origin]  git@ github.com:michaeliao/learngit.git
-
-3、 git push –u origin master 
-
- 
-
-git clone [git@github.com:hirocastest/first-pr.git](mailto:git@github.com:hirocastest/first-pr.git)
 
  
 
@@ -224,25 +114,11 @@ git clone [git@github.com:hirocastest/first-pr.git](mailto:git@github.com:hiroca
 
  
 
-### 忽略
-
-【大家一定要养成在项目开始就创建.gitignore文件的习惯，否则一旦push，处理起来会非常麻烦】
-
-在主目录下建立".gitignore"文件，此文件有如下规则：
-
  
 
-忽略文件中的空行或以井号（#）开始的行将会被忽略。
 
-可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,...}）代表可选的字符串等。
 
-如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。
-
-如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。
-
-如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。
-
-### 命令
+## 命令
 
 #### 配置
 
@@ -334,7 +210,11 @@ git log -1
 
 git log --pretty=oneline
 
+git log --graph --pretty=oneline --abbrev-commit
+
 git reflog 
+
+git log <分支名>  查看分支的提交
 
 ​      
 
@@ -384,7 +264,37 @@ git revert <commit-id >
 
  
 
-### 其它
+#### **git  stash**
+
+git stash   #执行存储
+
+​	**git stash save** "save message"    并添加备注  
+
+
+
+git stash list   # 查看stash了哪些存储  
+
+git stash show ；查看堆栈中最新保存的stash与当前目录的差异，默认show第一个存储，如果要显示其他存贮，后面加stash@{$num}，
+
+git stash show -p ; 显示第一个存储的改动  
+
+git stash apply  @{0}; 应用某个存储，但不会把存储从列表中删除。
+
+git stash pop 参数同上; 应用并删除
+
+git stash drop stash@{$num}; 丢弃存储，从列表中删除。
+
+git stash clear; 删除所有缓存的stash  
+
+
+
+​	
+
+
+
+
+
+## 其它
 
 在cmd命令行上更新windows下的git（git的版本>2.16.1）
 
@@ -393,6 +303,24 @@ git revert <commit-id >
  
 
 distributed 分布式
+
+#### 忽略
+
+【大家一定要养成在项目开始就创建.gitignore文件的习惯，否则一旦push，处理起来会非常麻烦】
+
+在主目录下建立".gitignore"文件，此文件有如下规则：
+
+ 
+
+忽略文件中的空行或以井号（#）开始的行将会被忽略。
+
+可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,...}）代表可选的字符串等。
+
+如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。
+
+如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。
+
+如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。
 
 #### 别名
 
@@ -418,31 +346,21 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 每个仓库的配置文件放在.git/config文件中
 
-#### git log
 
-**git log --graph**
 
-以图形化的方式显示提交历史的关系 
 
- 
 
-**git log -1**
+#### 使用git的一些原则
 
-则表示显示1行。
+1. 永远记得 git st 和 git logl 来确认当前分支的状态
+2. 宁愿临时制造一些无用的 commit 来保证代码不会丢失，也不要轻信自己的记忆力
+3. 谨慎（最好能避免）使用 git stash ，极易造成代码丢失
+4. 认真对待、编写每次的 commit message —— 它们能在关键时刻救你一命
+5. 必要的时候可以创建一些临时的分支写实验性的代码，而不是依赖 git reset 撤销 commit —— 大多数人在 git reset 的时候容易犯错误
 
- 
 
-git log（reflog） master(分支名)
 
-​    仅显示该分支的记录
-
- 
-
-$git log --graph --pretty=oneline --abbrev-commit
-
-![img](file:///C:/Users/w3986/AppData/Local/Temp/msohtmlclip1/02/clip_image002.jpg)
-
-##### 查看所有分支日志
+#### 查看所有分支日志
 
 "git reflog"中会记录这个仓库中所有的分支的所有更新记录，包括已经撤销的更新。
 
@@ -454,10 +372,5 @@ $git log --graph --pretty=oneline --abbrev-commit
 
  
 
-### 解决
 
-解决github打不开的办法 https://blog.csdn.net/weixin_44411398/article/details/112510646
 
- 
-
- 
