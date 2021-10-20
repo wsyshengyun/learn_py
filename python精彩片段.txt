@@ -1,0 +1,33 @@
+
+python3 print 打印行号
+	import sys
+	 def Log(msg):
+		 print('Print Message: '+msg+' ,File: "'+__file__+'", Line '+str(sys._getframe().f_lineno)+' , in '+sys._getframe().f_code.co_name)
+	 
+	 if __name__ == '__main__':
+		 Log('hello') # Print Message: hello ,File: "i.py", Line 4 , in Log
+
+	Log 函数是对 print 打印的再封装，可以显示出错程序所在的脚本名称、行号以及函数名。
+
+
+	其中：
+
+	sys._getframe().f_lineno ：当前行号，int 型
+	sys._getframe().f_code.co_name ：当前文件名称 string 型
+	函数执行如下：
+
+	Print Message: hello ,File: "i.py", Line 4 , in Log
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+
+
+查询IP所在的地理位置
+	https://www.cnblogs.com/madsnotes/p/5689138.html
+	
+IPy库的应用 
+	https://blog.csdn.net/yilovexing/article/details/108773440
+	
+在Python中查找本地非环回IP地址
+	https://www.thinbug.com/q/39988525
+	
+轻松的**本地IP和公网IP
+	http://www.360doc.com/content/18/0824/11/11935121_780819189.shtml
+	
+	

@@ -1,0 +1,14 @@
+
+vscode 插件python template snippets的输入提示短语
+python template snippets 
+ptvar	{{ * }}
+ptfilt	{{ `*
+ptcode	{% * %}
+ptblock	{% block * %} {% endblock * %}
+ptext	{% extends ' * ' %}
+ptsup	{{ super() }}
+ptfor	Adds a for loop block
+ptif	Adds an if statement block
+ptifel	Adds an if/else statement block
+ptelif	Adds an if/elif/else statement block
+ptwith	Adds a with statement block

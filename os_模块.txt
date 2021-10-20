@@ -1,0 +1,94 @@
+os模块是与操作系统交互 Operating System的简写
+------------------------
+os.getenv(key, default=None)
+	windows: key比如为'path',则返回path环境变量的值；
+	key表示环境变量名称字符串；
+	返回的是一个字符串，字符串内用分号相隔；
+
+注意，如果是读写文件的话，建议使用内置函数open()；如果是路径相关的操作，建议使用os的子模块os.path；如果要逐行读取多个文件，建议使用fileinput模块；要创建临时文件或路径，建议使用tempfile模块；要进行更高级的文件和路径操作则应当使用shutil模块。
+	os.path
+	fileinput模块
+	tempfile  临时的文件路径
+	shutil  更高级的文件和路径操作
+
+os.name 
+	'nt'     windows操作系统  Microsoft Windows NT
+	'posix'   可移植操作系统
+	'java'   	java虚拟机
+
+
+
+os.environ
+	返回一个字典
+	与os.getenv函数对应，等于是os.environ.get(key,default=None)  
+
+
+os.mkdir(新路径名称)
+	新建一个路径，是一个
+	是一个目录
+os.makedirs(可以是多级路径）
+	如果没有就会递归创建
+	也可以只建一个路径，这时同os.mkdir(..)
+
+os.remove()
+	删除文件
+os.rmdir(..) 
+	删除空目录
+	os.removedirs(...)
+		删除多级目录，遇到非空目录就会停止 
+
+
+路径就是指的目录
+
+os.rename(src, dst)
+	将文件或路径重命令
+	dst 和 src 可以不在同一个目录下
+	os.renames（src， dst）
+		是递归版本，会自动补上缺失的路径  
+
+os.getcwd()
+	get the current working directory 
+	返回一个路径，是一个绝对路径  
+
+os.chdir(xxx)
+	change the directory 
+	切换当前工作路径为指定路径。
+	xxx可以是绝对路径，也可以是相对路径  ‘..'
+
+
+===============os.path========================================================
+os.path.join(多个字符串，用,分开)
+	1，用\\连接参数
+	2，如果参数有绝对路径，那么最后一个绝对路径之前的参数都会被舍弃
+	
+
+os.path.abspath()
+	将传入的路径规范化，返回一个相应的绝对路径格式的字符串
+	1， 如果路径中用了/，那么自动将其转换成\\
+	2，如果只是一个字符串‘abc‘，那么自动将其与当前目录结合，join
+	
+os.path.basename(一个路径）
+	返回“基名” ，字符串
+	1， /分隔的最后一个字符串
+	2， 如果最后一个/后面什么也没有，就返回 一个空的字符串。
+os.path.dirname() 
+	与basename相反，返回的是最后一个字符串之前的路径；
+
+os.path.split(一个路径)
+	最后一个\为分隔标准
+
+os.path.exists()
+	所指定的位置是否存在
+
+os.path.isabs（xxx） 
+	是否是绝对路径
+
+os.path.isfile(xxx)  |  os.path.isdir(xxx)
+	是否是文件 | 是否是路径  
+	2 会检测路径的有效性，如果是无效路径，将会持续返回false
+
+
+
+
+
+
