@@ -84,11 +84,19 @@ commit: 对应快照，对应一个新的版本；
 
 版本号：1094adb7b9b3807259d8cb349e7df1d4d6477073
 
+
+
+### 问题
+
+commit有价值的提交：
+
+如何把暂存区的某个文件的改动撤消退到工作区？
+
 ##  名词
 
 ### 分支
 
-
+合并分支时文件内容也会相应的融合。
 
 ### git stash
 
@@ -112,9 +120,21 @@ git add 只是把文件添加到git版本控制里，并不等于就被stash起�
 
  
 
- 
+###  远程仓库
 
- 
+权限控制
+
+​	比如所有人都不准直接 git push origin master ，只有 admin 能 merge develop 或 master 分支；
+
+和远端相关的Git 指令，我认为最基础的就是 **fetch** 和 **push** 
+
+
+
+### 变基
+
+merge的结果是生成一个新的快照并提交。
+
+变基就是把提交到某一分支上的所有修改都移到另一个分支上。
 
 
 
@@ -289,6 +309,14 @@ git stash clear; 删除所有缓存的stash
 
 
 ​	
+
+#### 变基
+
+在一个分支上合并多个commit为一个完整commit
+
+git rebase -i  [startpoint] [endpoint]  ; endpoint 默认值是当前HEAD；合并startpoint到	endpoint,且该区间是前开后闭即(startpoint, endpoint] 
+
+
 
 
 
