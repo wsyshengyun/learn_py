@@ -94,6 +94,8 @@ commit有价值的提交：
 
 ##  名词
 
+HEAD^  上一个版本 
+
 ### 分支
 
 合并分支时文件内容也会相应的融合。
@@ -252,6 +254,24 @@ git diff HEAD：是查看working tree和repository的差别的。其中：HEAD�
 
 #### 版本回退
 
+提交后发现文件漏了可以使用如下
+
+​	git add . 
+
+​	git commit --amend ; 然后修改打开的文件注释
+
+
+
+暂存区 - > 工作区（撤销）
+
+git reset HEAD <filename>  ；把文件从暂存区回退到工作区 
+
+​	git reset HEAD .   ;  把所有文件从暂存区回退到工作区
+
+
+
+
+
 git reset - - hard HEAD 
 
 ​    gir reset - - hard 版本号
@@ -263,6 +283,8 @@ git reset --hard HEAD^
 git reset --hard HEAD~1
 
 git reset – 59cf9334cf957535cb328f22a1579b84db0911e5 
+
+
 
 git checkout -- 文件名  （--左右要有空格）
 
@@ -363,6 +385,8 @@ git comfig –global alias.br branch
 git config –global alias.unstage “reset HEAD”  # 可以把暂存区的内容撤消掉
 
 git config –global alias.last ‘log -1’# 显示最后一次提交的信息
+
+git config --global alias.lp "log --pretty=oneline"  # git log --pretty=oneline
 
 疯狂的lg 
 
