@@ -20,6 +20,10 @@ git config --global core.editor 'vim'
 
 
 
+### 怎么把别名应用到所有的本地仓库？
+
+### gitbash中怎么删除非空目录？
+
 
 
 ##  其它问题（未解决）

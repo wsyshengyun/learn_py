@@ -270,6 +270,12 @@ git reset HEAD <filename>  ；把文件从暂存区回退到工作区
 
 
 
+暂存区->上一次暂存（或上一个版本） 
+
+​	git reset HEAD file1;  将文件从暂存区撤回到工作区
+
+​	git checkout -- file1;  
+
 
 
 git reset - - hard HEAD 
@@ -286,7 +292,7 @@ git reset – 59cf9334cf957535cb328f22a1579b84db0911e5
 
 
 
-git checkout -- 文件名  （--左右要有空格）
+git checkout -- file1  （--左右要有空格）；将file1在工作区的修改撤回到上次暂存之前
 
 git revert <commit-id >
 
