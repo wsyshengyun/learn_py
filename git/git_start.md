@@ -46,6 +46,8 @@ $ git config –global user.email
 
 创建一个空目录 -> 进入 目录  -- > git init 
 
+> 如果是在当前目录 git  init  name ， 那么将创建一个name目录，仓库建立在name目录里面。
+
 目录里面多了一个.git 目录，默认是隐藏的， 用命令ls -ah 可以看见  
 
  
@@ -62,9 +64,9 @@ $ git config –global user.email
 
 版本库就是工作区的一个隐藏目录.git
 
-**版本库的东西**
+#### 版本库的东西
 
-最重要的就是【暂存区】了-stage（或者叫index）
+最重要的就是【暂存区】了-stage（或者叫index索引）
 
 Git为我们新建的一个【分支】-master，以及指向分支的一个指针叫HEAD
 
@@ -85,12 +87,6 @@ commit: 对应快照，对应一个新的版本；
 版本号：1094adb7b9b3807259d8cb349e7df1d4d6477073
 
 
-
-### 问题
-
-commit有价值的提交：
-
-如何把暂存区的某个文件的改动撤消退到工作区？
 
 ##  名词
 
@@ -130,13 +126,84 @@ git add 只是把文件添加到git版本控制里，并不等于就被stash起�
 
 和远端相关的Git 指令，我认为最基础的就是 **fetch** 和 **push** 
 
+克隆版本库 >对版本库之间进行关联（通过远程版本库）
 
+“远程版本库”
+
+​	是一个引用或句柄（remote）
+
+​	推模式和拉模式  -> 传输数据 
+
+“原始版本库”
+
+“克隆版本库”
+
+“远程追踪分支”（remote-tracking branch）
+
+“本地追踪分支“ local-tracking branch 
+
+”发布版本库“ publishing a  repository  -- 将你的版本库提供给他人
+
+### 版本库的概念
+
+裸版本库和开发版本库   bare 和 development，nobare 
+
+#### 开发版本库  
+
+​	用一常规的日常开发。保持当前分支的概念。
+
+#### 裸版本库
+
+​	没有工作目录，没有检出分支的概念，简单的看作.git目录的内容。
+
+​	不应该在裸版本库中进行提交操作
+
+​	作用：作为协作开发的权威焦点。其它开发人员从~中克隆、抓取、推送更新。 	
+
+​	建立命令：git init --bare dirname 
+
+​	注：裸版本库中不能建立远程版本库。如果你要创建一个版本库供开发人员推送修改，那么它应该是裸版本库。
+
+​	发布的版本库应该是一个裸版本库。
+
+> 工作目录是一个包含版本库历史目录.git和源文件的目录
+>
+> 工作目录是通过git  init   或者  git  clone 创建本地项目的拷贝。
+
+#### 版本库的克隆
+
+git clone 
+
+
+
+#### 分布式工作流程
+
+集中式工作流程 和集成管理者工作流
+
+##### 集中式工作流
+
+这意味着如果两个开发者从中心仓库克隆代码下来，同时作了一些修改，那么只有第一个开发者可以顺利地把数据推送回共享服务器。 第二个开发者在推送修改之前，必须先将第一个人的工作合并进来，这样才不会覆盖第一个人的修改。 这和 Subversion （或任何 CVCS）中的概念一样，而且这个模式也可以很好地运用到 Git 中。
+
+
+
+##### 集成管理者工作流
+
+1. 项目维护者推送到主仓库。
+2. 贡献者克隆此仓库，做出修改。
+3. 贡献者将数据推送到自己的公开仓库。
+4. 贡献者给维护者发送邮件，请求拉取自己的更新。
+5. 维护者在自己本地的仓库中，将贡献者的仓库加为远程仓库并合并修改。
+6. 维护者将合并后的修改推送到主仓库
 
 ### 变基
 
 merge的结果是生成一个新的快照并提交。
 
 变基就是把提交到某一分支上的所有修改都移到另一个分支上。
+
+在一个分支上合并多个commit为一个完整commit
+
+git rebase -i  [startpoint] [endpoint]  ; endpoint 默认值是当前HEAD；合并startpoint到	endpoint,且该区间是前开后闭即(startpoint, endpoint] 
 
 
 
@@ -184,7 +251,7 @@ git push origin - - tags 把不在远仓的标签推上去
 
 git push origin v1.5 显示推 
 
- 
+ 	
 
 git tag -d v1.4 删除标签 
 
@@ -221,6 +288,8 @@ git tag -d v1.4 删除标签
 ​    git checkout –d name 删除分支
 
 ​       git branch –d name 
+
+​	未合并的分支需要强制删除  git branch -D <name>
 
  
 
@@ -336,20 +405,6 @@ git stash clear; 删除所有缓存的stash
 
 
 
-​	
-
-#### 变基
-
-在一个分支上合并多个commit为一个完整commit
-
-git rebase -i  [startpoint] [endpoint]  ; endpoint 默认值是当前HEAD；合并startpoint到	endpoint,且该区间是前开后闭即(startpoint, endpoint] 
-
-
-
-
-
-
-
 ## 其它
 
 在cmd命令行上更新windows下的git（git的版本>2.16.1）
@@ -424,11 +479,36 @@ git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Crese
 
 ![https://images2017.cnblogs.com/blog/63651/201709/63651-20170906213836397-1160093052.png](file:///C:/Users/w3986/AppData/Local/Temp/msohtmlclip1/02/clip_image004.png)
 
- 
+##  github
 
- 
+下载代码的两种方式，一种是GUI另一种是通过命令行gitbash；
 
- 
+在gitbash上下载首先要获得ssh密钥，方法如下
+
+> 1.右键Git Bash Here
+> 2.**ssh-keygen -t rsa -C** “450402389@qq.com”
+> 3.cat ~/.ssh/id_rsa.pub
+> 4.复制key，添加到GitHub
+
+>  带PUb的为公钥
+>
+> **[ ssh-keygen -t rsa -C]**
+
+ 关于ssh和gpg
+
+[SSH、GPG学习与使用 | Zcp's Zone (chengpengzhao.com)](https://chengpengzhao.com/2020-03-04-ssh-yu-gpg-de-xue-xi-yu-shi-yong/)
+
+gitlab的使用方法 
+
+[如何使用gitlab - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/47823511)
+
+
+
+token权限
+
+至少要选择repo
+
+[(27条消息) github的token使用方法_chengwenyang的专栏-CSDN博客_github token 使用](https://blog.csdn.net/chengwenyang/article/details/120060010)
 
 
 
