@@ -22,6 +22,10 @@ git config --global core.editor 'vim'
 
 ### 怎么把别名应用到所有的本地仓库？
 
+git config --global  alias.
+
+--global 已经应用到所有仓库了。
+
 ### gitbash中怎么删除非空目录？
 
 rm <目录名> -rf 
